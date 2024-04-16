@@ -10,8 +10,8 @@ class CheckImportTask extends DefaultTask {
 
     @TaskAction
     void task() {
-        project.rootDir.listFiles().each { it ->
-            if (it.text.contains(rejectedValue)) {
+        project.fileTree("./").files.each { it ->
+            if (it.text.contains(rejectedValue) && it.name != "build.gradle") {
                 throw new BuildCancelledException("build was cancelled because project " +
                         "$project.name contains rejected value $rejectedValue in file ${it.name}")
             }
