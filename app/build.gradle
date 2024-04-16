@@ -1,0 +1,10 @@
+dependencies {
+    project(":client")
+    project(":remote")
+}
+
+plugins.apply(MyCustomPlugin)
+
+tasks.named('check-rejected-values', CheckImportTask){
+    rejectedValue = "@Data"
+}

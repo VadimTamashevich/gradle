@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+}
+
+group = 'gradle'
+version = '1.0-SNAPSHOT'
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy:3.0.19'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+// this block apply configurations for each project and root
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+// Sub projects dependencies, tasks, plugins configurations (apply for client, app, remote without root and buildSrc)
+subprojects {
+    apply plugin: 'java'
+
+    dependencies {
+        implementation 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    }
+}
+
+// Individual project dependencies, tasks, plugins configuration
+project('app') {
+    tasks.register('halo').configure {
+        group = "custom"
+        println("hello from $project.name)")
+    }
+}
+
+project('client'){
+    tasks.register('hello').configure {
+        group = "custom"
+        println("lets talk about $project.name project")
+    }
+}
+
+project('remote'){
+    tasks.register('hello').configure {
+        group = "custom"
+        println("lets talk about $project.name project")
+    }
+}
