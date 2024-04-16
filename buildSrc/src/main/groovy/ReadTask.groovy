@@ -1,14 +1,15 @@
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.TaskAction
 
 class ReadTask extends DefaultTask{
 
     @InputFile
-    File inputFile
+    RegularFileProperty file
 
     @TaskAction
     void printTask() {
-        println(inputFile.text.split(","))
+        println(file.get().asFile.text)
     }
 }

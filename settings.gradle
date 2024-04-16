@@ -1,4 +1,4 @@
-rootProject.name = 'gradle-demo'
+rootProject.name = 'gradle'
 include 'app'
 include 'client'
 include 'remote'
