@@ -1,18 +1,19 @@
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 
-class WriteTask extends DefaultTask{
+@CacheableTask
+class WriteTask extends DefaultTask {
 
     @OutputFile
-    RegularFileProperty file
+    final RegularFileProperty outputFile = project.objects.fileProperty()
 
     @TaskAction
     void write() {
-        File file = file.get().asFile
-        project.rootDir.listFiles().each {
-            file.append("${it.name}\n")
+        project.layout.projectDirectory.asFileTree.each { File it ->
+            outputFile.get().asFile.append("${it.name}\n")
         }
     }
 }

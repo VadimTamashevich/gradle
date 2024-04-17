@@ -3,13 +3,13 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.TaskAction
 
-class ReadTask extends DefaultTask{
+class ReadTask extends DefaultTask {
 
     @InputFile
-    RegularFileProperty file
+    final RegularFileProperty inputFile = project.objects.fileProperty()
 
     @TaskAction
     void printTask() {
-        println(file.get().asFile.text)
+        println(inputFile.get().asFile.text)
     }
 }

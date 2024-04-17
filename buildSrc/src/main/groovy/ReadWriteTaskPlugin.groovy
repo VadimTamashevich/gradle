@@ -5,14 +5,14 @@ class ReadWriteTaskPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.tasks.register("read-task", ReadTask) {
+         def writeTask = project.tasks.register("write-task", WriteTask) {
             group = "custom"
-            file = project.projectDir.createNewFile "./outputs/result.txt"
+            outputFile.set(project.layout.projectDirectory.file("result.txt"))
         }
 
-        project.tasks.register("write-task", WriteTask) {
+       def readTask = project.tasks.register("read-task", ReadTask) {
             group = "custom"
-            file = file.fileValue(new File("./outputs/result.txt"))
+            inputFile.set(writeTask.get().outputFile)
         }
     }
 }

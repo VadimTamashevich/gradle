@@ -3,3 +3,8 @@ include 'app'
 include 'client'
 include 'remote'
 
+ext.libs = [
+    appVersion : "1.0.0"
+]
+
+buildCache.local.directory = "./cashe"
