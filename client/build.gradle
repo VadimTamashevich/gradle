@@ -1,4 +1,4 @@
 plugins.apply(ReadWriteTaskPlugin)
 
 tasks.named("jar").get().finalizedBy("write-task")
-tasks.named("read-task").get().finalizedBy("write-task")
+tasks.named("write-task").get().finalizedBy("read-task")
