@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'groovy'
 }
 
 group = 'gradle'
@@ -37,7 +38,7 @@ subprojects {
 project('app') {
     tasks.register('halo').configure {
         group = "custom"
-        println("hello from $project.name)")
+        println("hello from $project.name")
     }
 }
 

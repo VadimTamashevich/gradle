@@ -1,0 +1,4 @@
+// transitive dependencies conflict case
+dependencies {
+    implementation "com.google.guava:guava:22.0"
+}

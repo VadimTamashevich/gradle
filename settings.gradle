@@ -1,10 +1,14 @@
+plugins {
+    //id "com.gradle.develocity" version "3.17.2"
+}
+
 rootProject.name = 'gradle'
 include 'app'
 include 'client'
 include 'remote'
 
 ext.libs = [
-    appVersion : "1.0.0"
+        appVersion: "1.0.0"
 ]
 
 buildCache.local.directory = "./cashe"
