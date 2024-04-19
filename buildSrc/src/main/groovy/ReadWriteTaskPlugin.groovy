@@ -8,6 +8,7 @@ class ReadWriteTaskPlugin implements Plugin<Project> {
         def writeTask = project.tasks.register("write-task", WriteTask) {
             group = "custom"
             outputFile.set(project.layout.projectDirectory.file("result.txt"))
+            enabled = false
         }
 
         def readTask = project.tasks.register("read-task", ReadTask) {

@@ -1,6 +1,8 @@
 plugins {
-    id 'java'
-    id 'groovy'
+    id 'java'   // плагин для java
+    id 'groovy' // плагин для груви
+   // id 'maven-publish' // плагин для паблишинга в удалённый репозиторий
+  //  id 'java-gradle-plugin' плагин для удобной разработки других плагинов
 }
 
 group = 'gradle'
@@ -55,3 +57,23 @@ project('remote'){
         println("lets talk about $project.name project")
     }
 }
+
+configurations {
+    compileJava {
+        resolutionStrategy.failOnVersionConflict()
+    }
+}
+
+// publish to repository case
+//publishing {
+//     repositories {
+//          maven {
+//               name "nexus"
+//               url  "https://nexus.senla.eu/repository/maven-central/"
+//               credentials {
+//                    username artifactUser
+//                    password artifactPass
+//               }
+//          }
+//     }
+//}

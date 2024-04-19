@@ -5,5 +5,5 @@ tasks.named("write-task").get().finalizedBy("read-task")
 
 // transitive dependencies conflict case
 dependencies {
-    implementation "com.google.guava:guava:29.0-jre"
+    implementation "com.googlecode.jsontoken:jsontoken:1.0"
 }

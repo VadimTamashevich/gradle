@@ -1,10 +1,10 @@
-dependencies {
-    project(":client")
-    project(":remote")
-}
-
 plugins.apply(MyCustomPlugin)
 
-tasks.named('check-rejected-values', CheckImportTask){
+tasks.named('check-rejected-values', CheckImportTask) {
     rejectedValue = "@Data"
+}
+
+// transitive dependencies conflict case
+dependencies {
+    implementation "com.googlecode.jsontoken:jsontoken:1.1"
 }

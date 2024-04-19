@@ -1,4 +1,10 @@
-// transitive dependencies conflict case
 dependencies {
-    implementation "com.google.guava:guava:22.0"
+     implementation project (":client")
+     implementation project(":app")
+}
+
+configurations.configureEach {
+     //resolutionStrategy.failOnVersionConflict() // при возникновении конфликта версий билд упадёт
+     resolutionStrategy.cacheDynamicVersionsFor(0, "minutes") // переопределение времени хранения кэша динамических зависимостей (дефолт 24ч)
+     resolutionStrategy.force('com.googlecode.jsontoken:jsontoken:1.1')
 }
