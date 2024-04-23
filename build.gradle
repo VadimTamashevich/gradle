@@ -1,8 +1,8 @@
 plugins {
     id 'java'   // плагин для java
     id 'groovy' // плагин для груви
-   // id 'maven-publish' // плагин для паблишинга в удалённый репозиторий
-  //  id 'java-gradle-plugin' плагин для удобной разработки других плагинов
+    // id 'maven-publish' // плагин для паблишинга в удалённый репозиторий
+    //  id 'java-gradle-plugin' плагин для удобной разработки других плагинов
 }
 
 group = 'gradle'
@@ -11,7 +11,7 @@ version = '1.0-SNAPSHOT'
 dependencies {
     implementation gradleApi()
     implementation 'org.codehaus.groovy:groovy:3.0.19'
-    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation platform("org.junit:junit-bom:5.10.0")
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
@@ -44,14 +44,14 @@ project('app') {
     }
 }
 
-project('client'){
+project('client') {
     tasks.register('hello').configure {
         group = "custom"
         println("lets talk about $project.name project")
     }
 }
 
-project('remote'){
+project('remote') {
     tasks.register('hello').configure {
         group = "custom"
         println("lets talk about $project.name project")
@@ -59,7 +59,7 @@ project('remote'){
 }
 
 configurations {
-    compileJava {
+    all {
         resolutionStrategy.failOnVersionConflict()
     }
 }
