@@ -1,4 +1,4 @@
-plugins.apply(MyCustomPlugin)
+plugins.apply(CheckImportPlugin)
 
 tasks.named('check-rejected-values', CheckImportTask) {
     rejectedValue = "@Data"

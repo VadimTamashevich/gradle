@@ -3,7 +3,7 @@
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-class MyCustomPlugin implements Plugin<Project> {
+class CheckImportPlugin implements Plugin<Project> {
 
     String rejectedValueProp
 

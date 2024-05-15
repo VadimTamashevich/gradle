@@ -1,6 +1,6 @@
-
-
 // transitive dependencies conflict case
 dependencies {
     implementation "com.googlecode.jsontoken:jsontoken:1.0"
 }
+
+plugins.apply(ReadWriteTaskPlugin)
