@@ -1,9 +1,9 @@
 plugins {
-    id("com.gradle.develocity") version "3.17.4"
+    //id("com.gradle.develocity") version "3.17.4"
 }
 
 //Композитный билд
-includeBuild("../gradle-plugin")
+//includeBuild("../gradle-plugin")
 
 rootProject.name = 'gradle'
 include 'app'
@@ -14,24 +14,37 @@ include 'remote'
 buildCache.local.directory = "./cashe"
 
 // Создание каталога версий зависимостей
+//dependencyResolutionManagement {
+//    versionCatalogs {
+//        libs {
+//            version('groovy', '3.0.5')
+//            library('groovy-core', 'org.codehaus.groovy', 'groovy').versionRef("groovy")
+//            library('groovy-json', 'org.codehaus.groovy:groovy-json:3.0.5')
+//            library('groovy-nio', 'org.codehaus.groovy:groovy-nio:3.0.5')
+//            library('commons-lang3', 'org.apache.commons:commons-lang3:3.9')
+//            library('lombok-lib', 'org.projectlombok:lombok:1.18.30')
+//
+//            plugin("java-doc", "io.spring.javadoc").version("0.0.1")
+//
+//            bundle("groovy", ["groovy-core", "groovy-json", "groovy-nio"])
+//        }
+//
+//        testLibs {
+//            library("junit-api", "org.junit.jupiter:junit-jupiter-api:5.7.1")
+//        }
+//
+//    }
+//}
+
+// создание каталога зависимостей с помощью файлов с расширением .toml
 dependencyResolutionManagement {
     versionCatalogs {
         libs {
-            version('groovy', '3.0.5')
-            library('groovy-core', 'org.codehaus.groovy', 'groovy').versionRef("groovy")
-            library('groovy-json', 'org.codehaus.groovy:groovy-json:3.0.5')
-            library('groovy-nio', 'org.codehaus.groovy:groovy-nio:3.0.5')
-            library('commons-lang3', 'org.apache.commons:commons-lang3:3.9')
-            library('lombok-lib', 'org.projectlombok:lombok:1.18.30')
-
-            plugin("java-doc", "io.spring.javadoc").version("0.0.1")
-
-            bundle("groovy", ["groovy-core", "groovy-json", "groovy-nio"])
+            from(files("../gradle/libs/main-dependencies.toml"))
         }
 
         testLibs {
-            library("junit-api", "org.junit.jupiter:junit-jupiter-api:5.7.1")
+            from(files("../gradle/libs/test-dependencies.toml"))
         }
-
     }
 }
