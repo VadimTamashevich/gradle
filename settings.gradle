@@ -13,7 +13,6 @@ include 'remote'
 //Определение директории локального кэша
 buildCache.local.directory = "./cashe"
 
-
 // Создание каталога версий зависимостей
 dependencyResolutionManagement {
     versionCatalogs {
@@ -25,7 +24,7 @@ dependencyResolutionManagement {
             library('commons-lang3', 'org.apache.commons:commons-lang3:3.9')
             library('lombok-lib', 'org.projectlombok:lombok:1.18.30')
 
-            plugin("java-doc","io.spring.javadoc").version("0.0.1")
+            plugin("java-doc", "io.spring.javadoc").version("0.0.1")
 
             bundle("groovy", ["groovy-core", "groovy-json", "groovy-nio"])
         }

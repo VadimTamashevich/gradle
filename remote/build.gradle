@@ -2,9 +2,3 @@ dependencies {
      implementation project (":client")
      implementation project(":app")
 }
-
-configurations.configureEach {
-     //resolutionStrategy.failOnVersionConflict() // при возникновении конфликта версий билд упадёт
-     resolutionStrategy.cacheDynamicVersionsFor(0, "minutes") // переопределение времени хранения кэша динамических зависимостей (дефолт 24ч)
-     resolutionStrategy.force('com.googlecode.jsontoken:jsontoken:1.1') // при возникновении конфликта жёстко устанавливаем версию зависимости которая попадёт в classpath
-}
