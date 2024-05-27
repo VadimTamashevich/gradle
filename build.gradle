@@ -2,7 +2,6 @@ plugins {
     id 'java-library'   // плагин для java
     id 'groovy' // плагин для груви
     alias(libs.plugins.java.doc)
-    // id 'java-gradle-plugin' плагин для удобной разработки других плагинов
 }
 
 group = 'gradle'
@@ -59,12 +58,4 @@ project('remote') {
         group = "custom"
         println("lets talk about $project.name project")
     }
-}
-
-// Паблишинг в удалённый репозиторий
-tasks.register("publish", PublishToMavenRepository) {
-    name = "nexus"
-    repository.url = "https://nexus.senla.eu/repository/maven-central/"
-    repository.credentials.username = artifactUser
-    repository.credentials.password = artifactPass
 }
