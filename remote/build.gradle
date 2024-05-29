@@ -5,13 +5,13 @@ dependencies {
 
 configurations.configureEach {
 
-    // при возникновении конфликта версий билд упадёт
+    /* при возникновении конфликта версий билд упадёт */
     //resolutionStrategy.failOnVersionConflict()
 
-    // при возникновении конфликта жёстко устанавливаем версию зависимости которая попадёт в classpath
+    /* при возникновении конфликта жёстко устанавливаем версию зависимости которая попадёт в classpath */
     //resolutionStrategy.force('com.googlecode.jsontoken:jsontoken:1.1')
 
-    // переопределение времени хранения кэша динамических зависимостей (дефолт 24ч)
-    resolutionStrategy.cacheDynamicVersionsFor(20, "minutes")
+    /* переопределение времени хранения кэша динамических зависимостей (дефолт 24ч)*/
+    //resolutionStrategy.cacheDynamicVersionsFor(20, "minutes")
 
 }

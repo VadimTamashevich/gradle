@@ -1,6 +1,3 @@
-
-
-
 import org.gradle.api.BuildCancelledException
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input

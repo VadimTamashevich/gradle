@@ -1,7 +1,49 @@
-plugins.apply(ReadWriteTaskPlugin)
+//plugins.apply(ReadWriteTaskPlugin)
 
 // transitive dependencies conflict case
 dependencies {
-    implementation ("com.googlecode.jsontoken:jsontoken:1.0")
+    implementation("com.googlecode.jsontoken:jsontoken:1.0")
 }
 
+
+tasks.register("print-task").configure {
+    group = "custom"
+
+    //logger.error("start test task")
+
+    doFirst {
+        println("create test task")
+        println("task in process")
+    }
+
+    doLast {
+        println("test task finished")
+    }
+}
+
+tasks.named("print-task").get().configure {
+    //dependsOn << tasks.classes
+    //finalizedBy("classes")
+}
+
+class CheckImportTask extends DefaultTask {
+
+    @Input
+    String rejectedValue
+
+    @TaskAction
+    void task() {
+        project.fileTree("./").files.each { it ->
+            if (it.text.contains(rejectedValue) && it.name != "build.gradle") {
+                throw new BuildCancelledException("build was cancelled because project " +
+                        "$project.name contains rejected value $rejectedValue in file ${it.name}")
+            }
+        }
+    }
+}
+
+project.tasks.register("check-rejected-values", CheckImportTask) {
+    group = 'custom'
+    description = "check build source files with rejected value"
+    rejectedValue = "@Data"
+}

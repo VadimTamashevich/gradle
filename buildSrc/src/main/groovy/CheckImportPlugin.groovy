@@ -5,13 +5,11 @@ import org.gradle.api.Project
 
 class CheckImportPlugin implements Plugin<Project> {
 
-    String rejectedValueProp
-
     @Override
     void apply(Project project) {
         project.tasks.register("check-rejected-values", CheckImportTask) {
             group = 'custom'
-            rejectedValue = rejectedValueProp
+            description = "check build source files with rejected value"
         }
 
         project.tasks.named("build") {
