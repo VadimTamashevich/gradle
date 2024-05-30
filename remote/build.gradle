@@ -1,17 +1,47 @@
 dependencies {
     implementation(project(":client"))
     implementation(project(":app"))
+    implementation('com.fasterxml.jackson.core:jackson-databind:default')
 }
 
 configurations.configureEach {
 
     /* при возникновении конфликта версий билд упадёт */
-    //resolutionStrategy.failOnVersionConflict()
+    // resolutionStrategy.failOnVersionConflict()
 
     /* при возникновении конфликта жёстко устанавливаем версию зависимости которая попадёт в classpath */
-    //resolutionStrategy.force('com.googlecode.jsontoken:jsontoken:1.1')
+    // resolutionStrategy.force('com.googlecode.jsontoken:jsontoken:1.1')
+
+    /* отключение транзитивных зависимостей, при наличии данной настройки будет подтягиваться только основной артефакт*/
+    // resolutionStrategy { transitive = false}
 
     /* переопределение времени хранения кэша динамических зависимостей (дефолт 24ч)*/
-    //resolutionStrategy.cacheDynamicVersionsFor(20, "minutes")
+    // resolutionStrategy.cacheDynamicVersionsFor(20, "minutes")
 
+    /* включает блокировку версий зависимости билда, в случае каких то изменений выбросит исключение */
+    // resolutionStrategy.failOnChangingVersions()
+
+
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.version == "default") {
+            details.useVersion findVersionInCatalog(details.requested.group, details.requested.name)
+        }
+    }
+}
+
+String findVersionInCatalog(String group, String name) {
+    List<Dependency> deps = new ArrayList<>()
+
+    rootProject.configurations.each {
+        if (project.name != it.name) {
+            configurations.each { it.dependencies.each { deps.add(it) } }
+        }
+    }
+
+    deps.each {
+        if (it.name == name && it.group == group) {
+            logger.warn("version placed: $it.version")
+            return it.version
+        }
+    }
 }
