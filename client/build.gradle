@@ -2,7 +2,7 @@ plugins.apply(ReadWriteTaskPlugin)
 
 // transitive dependencies conflict case
 dependencies {
-    implementation libs.jackson.databind
+    //implementation libs.jackson.databind
     implementation("com.googlecode.jsontoken:jsontoken:1.0")
 }
 
@@ -22,9 +22,9 @@ tasks.register("print-task").configure {
 }
 
 tasks.named("print-task").get().configure {
-    assemble.dependsOn("print-task")
-    it.shouldRunAfter("check")
-    //check.finalizedBy("print-task")
+    //assemble.dependsOn("print-task")
+    //it.shouldRunAfter("check")
+    //assemble.finalizedBy("print-task")
 }
 
 //class CheckImportTask extends DefaultTask {

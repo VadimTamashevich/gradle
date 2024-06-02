@@ -13,7 +13,7 @@ class ReadWriteTaskPlugin implements Plugin<Project> {
 
         def readTask = project.tasks.register("read-task", ReadTask) {
             group = "custom"
-            inputFile.set(writeTask.get().outputFile)
+            inputFile.set(writeTask.flatMap { it.outputFile })
         }
     }
 }

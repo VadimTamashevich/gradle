@@ -2,7 +2,10 @@ dependencies {
     implementation(project(":client"))
     implementation(project(":app"))
     implementation('com.fasterxml.jackson.core:jackson-databind:default')
+    implementation ('com.googlecode.jsontoken:jsontoken:1.1')
 }
+
+
 
 configurations.configureEach {
 
@@ -21,6 +24,8 @@ configurations.configureEach {
     /* включает блокировку версий зависимости билда, в случае каких то изменений выбросит исключение */
     // resolutionStrategy.failOnChangingVersions()
 
+    /* выключает возможность добавления динамических версий */
+    // resolutionStrategy.failOnDynamicVersions()
 
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         if (details.requested.version == "default") {
