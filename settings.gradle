@@ -11,7 +11,7 @@ plugins {
 }
 
 //Композитный билд
-//includeBuild("../gradle-plugin")
+includeBuild("../gradle-plugin")
 
 rootProject.name = 'gradle'
 include 'app'
