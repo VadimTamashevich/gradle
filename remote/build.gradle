@@ -2,10 +2,7 @@ dependencies {
     implementation(project(":client"))
     implementation(project(":app"))
     implementation('com.fasterxml.jackson.core:jackson-databind:default')
-    implementation ('com.googlecode.jsontoken:jsontoken:1.1')
 }
-
-
 
 configurations.configureEach {
 
@@ -18,35 +15,22 @@ configurations.configureEach {
     /* отключение транзитивных зависимостей, при наличии данной настройки будет подтягиваться только основной артефакт*/
     // resolutionStrategy { transitive = false}
 
-    /* переопределение времени хранения кэша динамических зависимостей (дефолт 24ч)*/
-    // resolutionStrategy.cacheDynamicVersionsFor(20, "minutes")
-
-    /* включает блокировку версий зависимости билда, в случае каких то изменений выбросит исключение */
-    // resolutionStrategy.failOnChangingVersions()
-
     /* выключает возможность добавления динамических версий */
     // resolutionStrategy.failOnDynamicVersions()
 
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        if (details.requested.version == "default") {
-            details.useVersion findVersionInCatalog(details.requested.group, details.requested.name)
-        }
-    }
+    /* включает блокировку изменения версий в случае каких либо изменений бросит исключение */
+    // resolutionStrategy.activateDependencyLocking()
+
+    /* включает блокировку изменения версий в случае каких либо изменений бросит исключение */
+    // resolutionStrategy.activateDependencyLocking()
+
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//
+//        if (details.requested.version == "default") {
+//            def name = details.requested.name.split("-")[0]
+//            details.useVersion java.util.Optional.ofNullable(project.libs.versions.config.versions.get(name).version.requiredVersion)
+//                    .orElseThrow(() -> new BuildCancelledException("version for $details.requested.name not found"))
+//        }
+//    }
 }
 
-String findVersionInCatalog(String group, String name) {
-    List<Dependency> deps = new ArrayList<>()
-
-    rootProject.configurations.each {
-        if (project.name != it.name) {
-            configurations.each { it.dependencies.each { deps.add(it) } }
-        }
-    }
-
-    deps.each {
-        if (it.name == name && it.group == group) {
-            logger.warn("version placed: $it.version")
-            return it.version
-        }
-    }
-}

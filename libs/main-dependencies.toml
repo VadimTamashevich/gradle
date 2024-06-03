@@ -7,6 +7,7 @@ groovy-json = { module = "org.codehaus.groovy:groovy-json", version.ref = "groov
 groovy-nio = { module = "org.codehaus.groovy:groovy-nio", version.ref = "groovy" }
 commons-lang3 = { group = "org.apache.commons", name = "commons-lang3", version = { strictly = "[3.8, 4.0[", prefer = "3.9" } }
 lombok-lib = { group = "org.projectlombok", name = "lombok", version = "1.18.30" }
+jackson-databind = { group = 'com.fasterxml.jackson.core', name = 'jackson-databind', version = '2.17.0' }
 
 [bundles]
 groovy = ["groovy-core", "groovy-json", "groovy-nio"]
