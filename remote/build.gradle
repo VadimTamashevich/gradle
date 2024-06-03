@@ -1,7 +1,7 @@
 dependencies {
     implementation(project(":client"))
     implementation(project(":app"))
-   // implementation('com.fasterxml.jackson.core:jackson-databind:default')
+     implementation('com.fasterxml.jackson.core:jackson-databind:default')
 }
 
 configurations.configureEach {
@@ -10,7 +10,7 @@ configurations.configureEach {
     // resolutionStrategy.failOnVersionConflict()
 
     /* при возникновении конфликта жёстко устанавливаем версию зависимости которая попадёт в classpath */
-    // resolutionStrategy.force('com.googlecode.jsontoken:jsontoken:1.1')
+    // resolutionStrategy.force('com.googlecode.jsontoken:jsontoken:1.0')
 
     /* отключение транзитивных зависимостей, при наличии данной настройки будет подтягиваться только основной артефакт*/
     // resolutionStrategy { transitive = false}
@@ -18,19 +18,16 @@ configurations.configureEach {
     /* выключает возможность добавления динамических версий */
     // resolutionStrategy.failOnDynamicVersions()
 
-    /* включает блокировку изменения версий в случае каких либо изменений бросит исключение */
+    /* включает блокировку изменения версий в случае каких либо изменений динамической версии бросит исключение */
     // resolutionStrategy.activateDependencyLocking()
 
-    /* включает блокировку изменения версий в случае каких либо изменений бросит исключение */
-    // resolutionStrategy.activateDependencyLocking()
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
 
-//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-//
-//        if (details.requested.version == "default") {
-//            def name = details.requested.name.split("-")[0]
-//            details.useVersion java.util.Optional.ofNullable(project.libs.versions.config.versions.get(name).version.requiredVersion)
-//                    .orElseThrow(() -> new BuildCancelledException("version for $details.requested.name not found"))
-//        }
-//    }
+        if (details.requested.version == "default") {
+            def name = details.requested.name.split("-")[0]
+            details.useVersion java.util.Optional.ofNullable(project.libs.versions.config.versions.get(name).version.requiredVersion)
+                    .orElseThrow(() -> new BuildCancelledException("version for $details.requested.name not found"))
+        }
+    }
 }
 
