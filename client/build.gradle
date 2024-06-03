@@ -1,5 +1,9 @@
 plugins.apply(ReadWriteTaskPlugin)
 
+//plugins {
+//    id "read-write-plugin"
+//}
+
 // transitive dependencies conflict case
 dependencies {
     implementation("com.googlecode.jsontoken:jsontoken:1.0")

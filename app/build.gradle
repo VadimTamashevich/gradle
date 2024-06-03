@@ -1,5 +1,9 @@
 plugins.apply(CheckImportPlugin)
 
+//plugins {
+//    id "check-import-plugin"
+//}
+
 tasks.named('check-rejected-values', CheckImportTask) {
     rejectedValue = "@Data"
 }
